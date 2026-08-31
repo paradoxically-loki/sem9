@@ -14,6 +14,7 @@
 5. [17th August - Monday](#17th-august---monday)
 6. [19th August - Wednesday](#19th-august---wednesday)
 7. [24th August - Monday](#24th-august---monday)
+8. [31st August - Monday](#31st-august---monday)
 
 ---
 
@@ -346,3 +347,52 @@ Absent
 ## 24th August - Monday
 
 Worked on paper
+
+---
+## 31st August - Monday
+
+### Option to Delay
+- Till now we have not considered dividends in our calculations.
+- Acc to BSM, $C = S N(d_1) - K e^{-rt} N(d_2)$
+- $d_1 = \left(\ln(S/E) + (r + \sigma^2/2)t \right)/ \sigma \sqrt{t}$, $d_2 = d_1 - \sigma \sqrt{t}$.
+- To accomodate dividends here, we make the following changes
+  - $S$ is replaced by $S e^{-yt}$
+  - $(r + \sigma^2/2)$ -> $(r -y + \sigma^2/2)$
+- Example
+  - Cost = 50 mil
+  - NPV = V - X, where V is the PV of all cashflows, and X is the cost
+  - But can V change during the project life? And does NPV accounts for it?
+  - Project generates cash flow of 10 million every year.
+  - Protection for 5 years due to patent rights.
+  - When there is uncertainty in V, it could be better to delay the project.
+  - Volatility? Maybe take from similar firms, or experience from previous projects done by the same firm.
+  - If the vol of output depends very strongly on the vol of inputs, then the vol of inputs could be used.
+  - But in this case, assume, $\sigma = 42\%$, and $r_f = 5\%$.
+  - Each year we don't start the project, we're losing out on 20% of the cashflows. So, we may assume the dividend yield to be $1/5$. (This assumes uniform cashflows.)
+  - If the cashflows are not uniform then the, $\text{cost of delay} = \frac{\text{cash flows (next period)}}{\text{pv of benefits}}$.
+  
+- Example 2: Patent
+  - PV of cashflows = 3.422 billion
+  - Cost of commercial development = 2.875 billion
+  - Patent period = 17 years
+  - $\sigma^2 = 0.224$, sd = 0.47
+  - $r_f = 6.7\%$
+  - What's the price one should pay to acquire this patent?
+  - And what's the value in delaying?
+
+- Example 3: Natural Resource
+  - Oil reserve of capacity: 50 million barells
+  - Cost of developing: 600 million
+  - Development lag: 2 years
+  - 20 years to exploit
+  - Market value of oil: 12 per barell
+  - variance = 0.03, sd = 0.173
+  - r_f = 8.08
+  - How much would be bid?
+  - Benefits: 12*50 million = 600 million
+  - Cost: 600 million
+  - NPV = 0
+
+---
+
+
