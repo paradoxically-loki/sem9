@@ -15,6 +15,7 @@
 6. [19th August - Wednesday](#19th-august---wednesday)
 7. [24th August - Monday](#24th-august---monday)
 8. [31st August - Monday](#31st-august---monday)
+9. [02nd September - Wednesday](#02nd-september---wednesday)
 
 ---
 
@@ -394,5 +395,44 @@ Worked on paper
   - NPV = 0
 
 ---
+## 02nd September - Wednesday
+### Option to Expand
+- Example
+  - a company doing test market bfr full scale roll out
+  - cost of limited introduction - 500 million
+  - pv of expected cashflows - 400 million
+  - If it is successful, then we go for full scale expansion
+  - cost of full plant - 1000 million
+  - pv of expected cashflows - 750 million
+  - sd of cashflows - 35%
+  - the expansion decision must be made in 5 yrs
+  - r_f = 5%
 
+### Option to Abandon
+- buybacks can be modelled as abandonment
+- Example
+  - two companies want to jointly implement a project
+  - investment needed = 500 million
+  - pv of the cashflows = 480 million
+  - abandonment value = 400 million
+  - 30 years project
+  - t = 5 years
+  - volatility = 25 %, r_f = 5%
+  - what's the value of this abandonment option?
 
+### Option to Abandon with varying strike prices
+This shall be assignment 4
+- Example
+   - S = 500
+   - t = 5 yr
+   - r_f = 5 %
+   - u = 1.649
+   - d = 0.607
+   - abandonment,
+      - year 1 = 300
+      - year 2 = 210
+      - year 3 = 147
+      - year 4 = 103
+      - year 5 = 72
+
+  - what is the value of this option?
