@@ -436,3 +436,8 @@ This shall be assignment 4
       - year 5 = 72
 
   - what is the value of this option?
+
+
+## 07th September - Monday
+### Estimating Volatility
+nothing to write there. wrote down stuff on paper
