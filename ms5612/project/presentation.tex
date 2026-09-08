@@ -129,7 +129,7 @@
             Selling Price ($S_0$) & Rs.~12,83,903 \\
             Buyback Price ($K$) & Rs.~11,55,641 \\
             Time to Maturity ($T$) & 3 months \\
-            Risk-free Rate ($r$) & 8\% p.a. \\
+            Risk-free Rate ($r$) & 5.26\% p.a. \\
             Depreciation ($\delta$) & 10\% p.a. \\
             Volatility ($\sigma$) & 15\% p.a.\ (base case) \\
             \bottomrule
@@ -160,23 +160,11 @@
     Since $S_T \gg K$, the \textbf{intrinsic value is zero} under pure depreciation.
 
     \vspace{0.5em}
-    But if we include the \textbf{buy-sell spread} (effective depreciation $> 10\%$):
+    But if we only value the option as the discounted value of depreciation. 
+    
+    We get, option value as $33,377 \times e^{- 0.0526 \times 0.25} = 32,941$.
 
-    \vspace{0.3em}
-    \begin{table}
-        \centering
-        \small
-        \begin{tabular}{@{}cccc@{}}
-            \toprule
-            \textbf{Eff. 3M Dep.} & \textbf{Market Value} & \textbf{Payoff} & \textbf{PV of Payoff} \\
-            \midrule
-            2.5\% & 12,51,805 & 0 & 0 \\
-            10.0\% & 11,55,513 & 128 & 126 \\
-            12.0\% & 11,29,835 & 25,806 & 25,295 \\
-            15.0\% & 10,91,318 & 64,323 & 63,050 \\
-            \bottomrule
-        \end{tabular}
-    \end{table}
+
 \end{frame}
 
 
@@ -237,7 +225,7 @@
     \]
 
     \vspace{0.5em}
-    \textbf{Key modelling point:} Since depreciation is explicitly in the stock price, we use the \emph{standard} risk-neutral probability $p$ -- no adjustment needed (avoids double-counting).
+    Since depreciation is explicitly in the stock price, we use the \emph{standard} risk-neutral probability $p$. (no adjustment is needed)
 
     \vspace{0.5em}
     Over 90 days, the depreciation factor is:
@@ -386,8 +374,7 @@
             \toprule
             \textbf{Method} & \textbf{Volatility} & \textbf{Put Value (Rs.)} \\
             \midrule
-            Fundamental (10\% eff. dep.) & -- & 126 \\
-            Fundamental (12\% eff. dep.) & -- & 25,295 \\
+            Fundamental (10\% dep.) & -- & 32,941 \\
             Standard Binomial & 30\% & 20,513 \\
             BSM (no depreciation) & 25\% & 12,496 \\
             BSM (with depreciation) & 25\% & 18,139 \\
