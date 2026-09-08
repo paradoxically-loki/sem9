@@ -1,0 +1,9 @@
+\beamer@sectionintoc {1}{About Spinny}{3}{0}{1}
+\beamer@sectionintoc {2}{Basics of Options}{4}{0}{2}
+\beamer@sectionintoc {3}{The Buyback Offer}{6}{0}{3}
+\beamer@sectionintoc {4}{Pricing: Fundamental Approach}{7}{0}{4}
+\beamer@sectionintoc {5}{Pricing: Binomial Model}{8}{0}{5}
+\beamer@sectionintoc {6}{Pricing: Black-Scholes-Merton}{13}{0}{6}
+\beamer@sectionintoc {7}{Right to Abandon}{18}{0}{7}
+\beamer@sectionintoc {8}{Consolidation}{19}{0}{8}
+\beamer@sectionintoc {9}{Conclusion}{21}{0}{9}

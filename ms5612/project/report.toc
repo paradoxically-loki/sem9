@@ -1,0 +1,31 @@
+\contentsline {section}{\numberline {1}Executive Summary}{2}{section.1}%
+\contentsline {section}{\numberline {2}About Spinny}{2}{section.2}%
+\contentsline {section}{\numberline {3}Basics of Options}{2}{section.3}%
+\contentsline {subsection}{\numberline {3.1}Vanilla Options}{3}{subsection.3.1}%
+\contentsline {subsection}{\numberline {3.2}Real Options}{3}{subsection.3.2}%
+\contentsline {section}{\numberline {4}Spinny's Buyback Offer}{3}{section.4}%
+\contentsline {subsection}{\numberline {4.1}Mechanics of the Offer}{4}{subsection.4.1}%
+\contentsline {subsection}{\numberline {4.2}Mapping to Standard Option Parameters}{4}{subsection.4.2}%
+\contentsline {subsection}{\numberline {4.3}Identifying the Option Type}{4}{subsection.4.3}%
+\contentsline {subsection}{\numberline {4.4}Option Parameters for Our Analysis}{5}{subsection.4.4}%
+\contentsline {section}{\numberline {5}Pricing Spinny's Buyback Option}{6}{section.5}%
+\contentsline {subsection}{\numberline {5.1}Pricing Using Fundamentals}{6}{subsection.5.1}%
+\contentsline {subsection}{\numberline {5.2}Pricing by Binomial Model (Standard)}{7}{subsection.5.2}%
+\contentsline {subsubsection}{\numberline {5.2.1}Model Setup}{7}{subsubsection.5.2.1}%
+\contentsline {subsubsection}{\numberline {5.2.2}Standard Binomial Result}{8}{subsubsection.5.2.2}%
+\contentsline {subsection}{\numberline {5.3}Pricing by Binomial Model with Deterministic Depreciation}{8}{subsection.5.3}%
+\contentsline {subsubsection}{\numberline {5.3.1}Modified Stock Price Tree}{8}{subsubsection.5.3.1}%
+\contentsline {subsubsection}{\numberline {5.3.2}Sensitivity Analysis: Heatmap}{9}{subsubsection.5.3.2}%
+\contentsline {subsubsection}{\numberline {5.3.3}Binomial Tree Visualisation}{10}{subsubsection.5.3.3}%
+\contentsline {subsection}{\numberline {5.4}Pricing by Black-Scholes-Merton Formula (Standard)}{10}{subsection.5.4}%
+\contentsline {subsubsection}{\numberline {5.4.1}The BSM Put Formula}{10}{subsubsection.5.4.1}%
+\contentsline {subsubsection}{\numberline {5.4.2}BSM Heatmap (No Depreciation)}{11}{subsubsection.5.4.2}%
+\contentsline {subsection}{\numberline {5.5}Pricing by Black-Scholes-Merton with Depreciation}{12}{subsection.5.5}%
+\contentsline {subsubsection}{\numberline {5.5.1}Converting Depreciation to a Continuous Rate}{12}{subsubsection.5.5.1}%
+\contentsline {subsubsection}{\numberline {5.5.2}Modified BSM Put Formula}{12}{subsubsection.5.5.2}%
+\contentsline {subsubsection}{\numberline {5.5.3}BSM with Depreciation: Heatmap}{12}{subsubsection.5.5.3}%
+\contentsline {subsection}{\numberline {5.6}Buyback Option as a Right to Abandon}{14}{subsection.5.6}%
+\contentsline {subsection}{\numberline {5.7}Consolidating the Pricing}{14}{subsection.5.7}%
+\contentsline {section}{\numberline {6}Conclusion}{15}{section.6}%
+\contentsline {section}{\numberline {7}Acknowledgements}{16}{section.7}%
+\contentsline {section}{\numberline {8}Code, Data, and Other Resources}{16}{section.8}%
