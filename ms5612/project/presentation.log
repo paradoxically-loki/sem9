@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.141592653-2.6-1.40.28 (TeX Live 2025/Debian) (preloaded format=pdflatex 2026.6.25)  8 SEP 2026 18:59
+This is pdfTeX, Version 3.141592653-2.6-1.40.28 (TeX Live 2025/Debian) (preloaded format=pdflatex 2026.6.25)  8 SEP 2026 19:10
 entering extended mode
  restricted \write18 enabled.
  file:line:error style messages enabled.
@@ -778,7 +778,7 @@ File: ot1mathkerncmss.fd 2020/01/31 Fontinst v1.933 font definitions for OT1/mat
 ] [10
 
 ]
-<fig_cell2.png, id=142, 794.97pt x 578.16pt>
+<fig_cell2.png, id=369, 794.97pt x 578.16pt>
 File: fig_cell2.png Graphic file (type png)
 <use fig_cell2.png>
 Package pdftex.def Info: fig_cell2.png  used on input line 244.
@@ -790,7 +790,7 @@ LaTeX Font Info:    Font shape `OT1/ptm/bx/n' in size <7.4> not available
  [11
 
  <./fig_cell2.png>]
-<fig_cell3.png, id=150, 1156.32pt x 722.7pt>
+<fig_cell3.png, id=399, 1156.32pt x 722.7pt>
 File: fig_cell3.png Graphic file (type png)
 <use fig_cell3.png>
 Package pdftex.def Info: fig_cell3.png  used on input line 253.
@@ -800,7 +800,7 @@ Package pdftex.def Info: fig_cell3.png  used on input line 253.
  <./fig_cell3.png>] [13
 
 ]
-<fig_cell4.png, id=162, 794.97pt x 578.16pt>
+<fig_cell4.png, id=456, 794.97pt x 578.16pt>
 File: fig_cell4.png Graphic file (type png)
 <use fig_cell4.png>
 Package pdftex.def Info: fig_cell4.png  used on input line 284.
@@ -810,7 +810,7 @@ Package pdftex.def Info: fig_cell4.png  used on input line 284.
  <./fig_cell4.png>] [15
 
 ]
-<fig_cell5.png, id=175, 794.97pt x 578.16pt>
+<fig_cell5.png, id=513, 794.97pt x 578.16pt>
 File: fig_cell5.png Graphic file (type png)
 <use fig_cell5.png>
 Package pdftex.def Info: fig_cell5.png  used on input line 313.
@@ -851,18 +851,18 @@ Package rerunfilecheck Info: File `presentation.out' has not changed.
 (rerunfilecheck)             Checksum: A21C044B60510B494AA40067AD909D4A;1253.
  ) 
 Here is how much of TeX's memory you used:
- 22213 strings out of 467533
- 428276 string characters out of 5422138
- 806730 words of memory out of 5000000
- 50580 multiletter control sequences out of 15000+600000
+ 22238 strings out of 467533
+ 429117 string characters out of 5422138
+ 809989 words of memory out of 5000000
+ 50605 multiletter control sequences out of 15000+600000
  664851 words of font info for 133 fonts, out of 8000000 for 9000
  1141 hyphenation exceptions out of 8191
- 128i,11n,123p,434b,616s stack positions out of 10000i,1000n,20000p,200000b,200000s
+ 128i,15n,123p,434b,616s stack positions out of 10000i,1000n,20000p,200000b,200000s
 </usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmex10.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi10.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmss10.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmss12.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmss17.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmss8.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmssbx10.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmssi10.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmssi12.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmssi8.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy10.pfb></usr/share/texmf/fonts/type1/public/cm-super/sfss1095.pfb></usr/share/texlive/texmf-dist/fonts/type1/urw/symbol/usyr.pfb>
-Output written on presentation.pdf (22 pages, 1194587 bytes).
+Output written on presentation.pdf (22 pages, 1219026 bytes).
 PDF statistics:
- 285 PDF objects out of 1000 (max. 8388607)
- 209 compressed objects within 3 object streams
+ 774 PDF objects out of 1000 (max. 8388607)
+ 671 compressed objects within 7 object streams
  54 named destinations out of 1000 (max. 500000)
  183 words of extra memory for PDF output out of 10000 (max. 10000000)
 
