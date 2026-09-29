@@ -1,0 +1,733 @@
+\documentclass[12pt]{article} % default is 10pt
+%%%%%%%%%%%%%%%%%%%%PREAMBLE%%%%%%%%%%%%%%%%%%%%
+%%%BASIC Packages
+%\usepackage[utf8x]{inputenc} % to set input encoding (not needed with XeLaTeX)
+%\usepackage[T1]{fontenc} % to set font encoding in latex; difference noticed for <>
+\usepackage{amsmath,amssymb,xfrac,mathrsfs,accents,bbm} % for mathematical symbols
+\usepackage{mathbbol,subcaption}
+%\usepackage{bbold}
+%\usepackage{slashed} % for Dirac slash
+%\usepackage{youngtab} % for Young tableux
+%\usepackage{tipa,ulem,wasysym} % for some combining accents & other exotic symbols
+%\usepackage{ulem}
+\usepackage{multicol}
+\usepackage{sectsty} % to change title styles
+\usepackage{graphicx,enumerate, bm} % for \includegraphics command and options
+%\graphicspath{{figures/}}
+\usepackage{color} % to use color
+\usepackage[unicode]{hyperref} % for bookmarks in Acrobat Reader and using hyperlinks
+\hypersetup{bookmarksnumbered=true, bookmarksopen=true,
+  bookmarksopenlevel=2, breaklinks=true, citecolor=blue,
+  colorlinks=true, linkcolor=red, linktoc=page, pdfborder={0 0 0},
+  pdfkeywords={Problems, }{Stochastic Calculus, }{HW},
+  pdfstartview=FitH, pdfauthor={NSP}, pdfsubject={Assignment solutions
+    for Mathematical Finance - Fall 2026}, pdftitle={Assignment
+    solutions - Mathematical Finance}, plainpages=false, unicode=true,
+  urlcolor=cyan}
+
+%%%PAGE Styling
+\usepackage{geometry} % to change the page dimensions
+\geometry{letterpaper, hmargin={2.5cm,2.5cm}, vmargin={2.5cm,2cm}, headsep=0cm, headheight=1cm, footskip=1.5cm}
+\usepackage{fancyhdr} % This should be set AFTER setting up the page geometry
+\pagestyle{plain} % options: empty , plain , fancy
+\renewcommand{\headrulewidth}{0pt}%\lhead{}\chead{}\rhead{}\lfoot{}\cfoot{\thepage}\rfoot{}
+\usepackage{parskip} % needed to not screw up 'other' spacings!
+\setlength{\parindent}{0.5cm}
+\usepackage[titles]{tocloft} % to alter the style of the ToC
+\renewcommand{\cftsecfont}{\rmfamily\mdseries\upshape}
+\renewcommand{\cftsecpagefont}{\rmfamily\mdseries\upshape} % No bold!
+
+\DeclareSymbolFontAlphabet{\ambb}{AMSb}
+
+\newcommand{\mbb}[1]{\mathbb{#1}}
+\newcommand{\mc}[1]{\mathcal{#1}}
+\newcommand{\tl}[1]{\tilde{#1}}
+\newcommand{\wt}[1]{\widetilde{#1}}
+\newcommand{\ul}[1]{\underline{#1}}
+\newcommand{\ud}{\text{d}}
+\newcommand{\e}{\text{e}}
+\newcommand{\mE}{\ambb{E}}
+\newcommand{\mW}{\ambb{W}}
+\newcommand{\mV}{\ambb{V}}
+\newcommand{\mX}{\ambb{X}}
+\newcommand{\mY}{\ambb{Y}}
+\newcommand{\mZ}{\ambb{Z}}
+\newcommand{\mR}{\ambb{R}}
+\newcommand{\mTheta}{\mathbb{\Theta}}
+\newcommand{\mM}{\ambb{M}}
+\newcommand{\mS}{\ambb{S}}
+\newcommand{\mP}{\ambb{P}}
+\newcommand{\mDelta}{\mbb{\Delta}}
+\newcommand{\cA}{\mathcal{A}}
+\newcommand{\cF}{\mathcal{F}}
+
+\newcommand{\Ans}{\textbf{Ans. }}
+
+
+\renewcommand{\baselinestretch}{1.2}
+%\numberwithin{equation}{section} % Equations numbered as <section>.#
+%\renewcommand{\theequation}{\Roman{equation}}
+\renewcommand{\labelenumi}{{\theenumi.}}
+\renewcommand{\theenumii}{\alph{enumii}}\renewcommand{\labelenumii}{\theenumii)}
+\hyphenation{hyph-ena-tion super-space anti-com-mut-a-tion}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\begin{document}
+\thispagestyle{fancy} \lhead{\bf{\large Assignment 2} }\chead{\Large
+  ID5103: Mathematical Finance}\rhead{Solutions}
+
+
+% \section*{On conditional expectations and sigma algebras}
+\section*{}
+
+In this assignment, we explore conditional expectations and their
+computation for the random walk stochastic process. We will gradually
+develop all the ingredients needed to compute conditional expectations
+given the information contained in some $\sigma$-algebra. A general
+sample space will be denoted $\Omega$, with more specific notation
+like $\Omega_N$ reserved for sample spaces involving coin tosses. Note
+that the ideas and results discussed below are guaranteed to apply
+only to situations where the sample space has a finite number of
+elements, and where the random variables are assumed to take a finite
+number of values. The sample space and random variables of the random
+walk satisfy these conditions. For other kinds of sample spaces and
+random variables, one must carefully reconsider each result and check
+their validity.
+
+The random walk stochastic process $\mM_n$, $0 \leq n \leq N$, is
+defined as follows. Define $\mM_0 = 0$. Then, we define the
+independent random variables $\mX_i$ which depend only on the
+$i^{\rm th}$ coin toss, specified by
+\begin{equation}
+  \mX_i(\omega_i) = \left\{\begin{array}{cc} +1 & \omega_i = H\ , \\ -1 & \omega_i = T\ . \end{array}\right.
+\end{equation}
+The random variable $\mM_n$ is then defined as the sum of the first
+$n$ $\mX_i$:
+\begin{equation}
+  \mM_n(\omega_1 \cdots \omega_n) = \sum_{i=1}^n \mX_i(\omega_i)\ ,\quad\text{for}\ n = 1,\ldots,N\ .
+\end{equation}
+
+We also need the definition of an event. Simply said, an event is a
+subset of the sample space. Usually, an event is a particular subset
+defined by a rule or a collection of rules that the elements of the
+subset must satisfy. For instance, the event $\mM_1 = 1$ is a subset
+of $\Omega_N$ containing sequences of coin tosses which start with a
+$H$.
+
+Given a collection of events $A_1, A_2, \ldots, A_k$ in a sample space
+$\Omega$, the $\sigma$-algebra generated by the events is the
+collection of subsets obtained by taking all possible unions,
+intersections and complements of $A_1, A_2, \ldots, A_k$. This
+$\sigma$-algebra is written as $\sigma(A_1, \ldots, A_k)$.
+
+Note: This $\sigma$-algebra also turns out to be the smallest
+$\sigma$-algebra containing $A_1, \ldots, A_k$. That is, among all
+$\sigma$-algebras containing the events $A_1, \ldots, A_k$, the
+$\sigma$-algebra $\sigma(A_1, \ldots, A_k)$ is the one with the
+smallest number of events in it. This notion of ``smallest
+$\sigma$-algebra containing some events'' arises frequently in
+probability theory.
+
+\textbf{Exercise 1a (4 points):} Construct the $\sigma$-algebra
+generated by the following subsets of $\Omega_3$:
+\begin{equation}
+  A_1 = \{HHH, HHT\}\ ,\quad A_2 = \{HHT, HTH, TTH\}\ .
+\end{equation}
+\footnote{This is an example where the subsets that generate the
+  $\sigma$-algebra have non-empty intersections amongst themselves.}
+
+\Ans We first list all $8$ elements of $\Omega_3$:
+$HHH,HHT,HTH,HTT,THH,THT,TTH,TTT$. We compute the basic combinations
+of $A_1$ and $A_2$:
+\begin{align}
+  A_1 \cap A_2 &= \{HHT\}\ , \\
+  A_1^c &= \{HTH,HTT,THH,THT,TTH,TTT\}\ ,\\
+  A_2^c &= \{HHH,HTT,THH,THT,TTT\}\ ,\\
+  A_1 \cap A_2^c &= A_1 \setminus A_2 = \{HHH\}\ ,\\
+  A_2 \cap A_1^c &= A_2 \setminus A_1 = \{HTH,TTH\}\ ,\\
+  A_1^c \cap A_2^c &= (A_1 \cup A_2)^c = \{HTT,THH,THT,TTT\}\ .
+\end{align}
+These four sets,
+\begin{equation}
+  E_1 = \{HHT\}\ ,\quad E_2 = \{HHH\}\ ,\quad E_3 = \{HTH,TTH\}\ ,\quad E_4 = \{HTT,THH,THT,TTT\}\ ,
+\end{equation}
+are pairwise disjoint and their union is all of $\Omega_3$ (since
+$1+1+2+4 = 8$), so they are exactly the atoms of $\sigma(A_1,A_2)$
+(this is verified in Exercise 1b below). The full $\sigma$-algebra
+$\sigma(A_1,A_2)$ consists of all $2^4 = 16$ possible unions of these
+four atoms:
+\begin{equation}
+  \sigma(A_1,A_2) = \{\ \textstyle\bigcup_{i \in S} E_i \ :\ S \subseteq \{1,2,3,4\}\ \}\ .
+\end{equation}
+Explicitly, these $16$ sets are $\emptyset$, the four atoms
+$E_1,E_2,E_3,E_4$, the six pairwise unions $E_1 \cup E_2 = A_1$,
+$E_1 \cup E_3 = A_2$, $E_1\cup E_4$, $E_2 \cup E_3$, $E_2 \cup E_4$,
+$E_3 \cup E_4$, the four triple unions $E_1\cup E_2\cup E_3 = A_1\cup
+A_2$, $E_1 \cup E_2 \cup E_4$, $E_1 \cup E_3 \cup E_4 = A_1^c \cup A_2
+= \Omega_3 \setminus \{HHH\}$, $E_2 \cup E_3 \cup E_4 = \Omega_3
+\setminus \{HHT\}$, and finally $\Omega_3 = E_1 \cup E_2 \cup E_3 \cup
+E_4$. \hfill$\blacksquare$
+
+An atomic event or simply an atom of a $\sigma$-algebra is an event in
+the $\sigma$-algebra which does not contain any other event in the
+$\sigma$-algebra except itself or the empty set $\emptyset$. Suppose a
+$\sigma$-algebra is generated by a finite number of subsets. For such a
+$\sigma$-algebra, its atoms have the following properties:
+\begin{enumerate}
+\item The intersection of any two atoms is empty.
+\item The union of all the atoms is the sample space itself.
+\item The collection of all atoms generates the $\sigma$-algebra.
+\end{enumerate}
+Caution: There are $\sigma$-algebras which do not have any atomic
+events in them, or even if there are atoms, they may not generate the
+$\sigma$-algebra. However, we will not consider them in this course.
+
+Note that a $\sigma$-algebra may not have been specified as being
+generated by atoms but by some other collection of a finite number of
+subsets. However, once we obtain the atoms of the $\sigma$-algebra, we
+can show that these also generate the same $\sigma$-algebra. For
+instance, let us look at the $\sigma$-algebra generated by the subsets
+$C = \{HTT, HTH\}$ and $D = \{HTH, HHH\}$ of $\Omega_3$. The
+$\sigma$-algebra is obtained by taking all possible unions,
+intersections and complements:
+\begin{gather}
+  C = \{HTT, HTH\}\ ,\quad D = \{HTH, HHH\}\ ,\notag\\
+  C \cup D = \{HHH, HTH, HTT\}\ ,\quad C \cap D = \{HTH\}\ ,\notag\\
+  C^c = \{HHH, HHT, THH, THT, TTH, TTT\}\ ,\notag\\
+  D^c = \{HHT, HTT, THH, THT, TTH, TTT\}\ ,\notag\\
+  (C \cap D)^c = C^c \cup D^c = \{HHH, HHT, HTT, THH, THT, TTH, TTT\}\ ,\notag\\
+  (C \cup D)^c = C^c \cap D^c = \{HHT, THH, THT, TTH, TTT\}\ ,\notag\\
+  C \cup D^c = \{HHT, HTH, HTT, THH, THT, TTH, TTT\}\ ,\notag\\
+  D \cup C^c = \{HHH, HHT, HTH, THH, THT, TTH, TTT\}\ ,\notag\\
+  C \cap D^c = \{HTT\}\ ,\quad D \cap C^c = \{HHH\}\ ,\notag\\
+  C \cup C^c = D \cup D^c = \Omega_3\ ,\quad C \cap C^c = D \cap D^c = \emptyset\ .
+\end{gather}
+The atoms of the above $\sigma$-algebra are
+\begin{gather}
+  C \cap D = \{HTH\}\ ,\quad C \cap D^c = \{HTT\}\ ,\quad D \cap C^c = \{HHH\}\, \notag\\
+  C^c \cap D^c = \{HHT, THH, THT, TTH, TTT\}\ .
+\end{gather}
+It is easy to verify each of the three properties mentioned above for
+these atoms.
+
+\textbf{Exercise 1b (2 points):} Describe the atomic subsets of the
+$\sigma$-algebra $\sigma(A_1, A_2)$ obtained in Exercise 1b.
+
+Note that $A_1, A_2$ are not atomic subsets since they have a
+non-empty intersection, and also their union is not the sample space.
+
+\Ans Exactly as in the worked-out $C,D$ example above, we compute the
+four pairwise combinations of $A_1, A_2$ and their complements. These
+are precisely the four sets $E_1,E_2,E_3,E_4$ found in Exercise 1a:
+\begin{gather}
+  E_1 = A_1 \cap A_2 = \{HHT\}\ ,\quad E_2 = A_1 \cap A_2^c = \{HHH\}\ ,\notag\\
+  E_3 = A_2 \cap A_1^c = \{HTH, TTH\}\ ,\quad E_4 = A_1^c \cap A_2^c = \{HTT, THH, THT, TTT\}\ .
+\end{gather}
+One checks directly that $E_1,E_2,E_3,E_4$ are pairwise disjoint, that
+their union is $\Omega_3$, and that none of them contains a smaller
+non-empty proper subset that itself belongs to $\sigma(A_1,A_2)$
+(other than $\emptyset$). Hence $E_1,E_2,E_3,E_4$ are exactly the four
+atoms of $\sigma(A_1,A_2)$. As noted in the exercise, $A_1$ and $A_2$
+themselves are \emph{not} atoms: $A_1 = E_1 \cup E_2$ and
+$A_2 = E_1 \cup E_3$ are each unions of two atoms, and neither equals
+$\Omega_3$. \hfill$\blacksquare$
+
+We now describe the $\sigma$-algebra generated by a random variable
+$X$ which takes a finite set of values. The set of all values taken by
+a random variable $X$ is called the range of $X$ and is denoted
+$\text{Ran}(X)$ or $\text{Range}(X)$.
+
+Consider subsets of sample space (events) of the form $\{X = a\}$
+where $a$ is one of the possible values in $\text{Range}(X)$. For
+instance, when the total number of coin tosses is $N = 4$, the event
+$\{\mM_2 = 2\}$ consists of the sequences
+$\{HHHH, HHHT, HHTH, HHTT\}$, i.e., all sequences starting with two
+heads. Using the collection of all such subsets, form all possible
+unions, intersections and complements. The resulting collection of
+subsets is closed under unions, intersections and complements and is
+called the $\sigma$-algebra generated by the random variable $X$ and
+is denoted $\sigma(X)$.
+
+Similarly, the $\sigma$-algebra generated by a collection of random
+variables $X_1, X_2, \ldots, X_n$ is obtained as follows. Consider all
+subsets of the form $\{X_1 = a_1\}, \{X_2 = a_2\}, \ldots, \{X_n =
+a_n\}$ where $a_1$ runs through the range of $X_1$, $a_2$ runs through
+the range of $X_2$ and so on. Form all possible unions, intersections
+and complements of all these subsets: this is the $\sigma$-algebra
+generated by $X_1, X_2, \ldots, X_n$ and is denoted
+$\sigma(X_1, X_2, \ldots, X_n)$.
+
+\textbf{Exercise 1c (6 points):} Compute the $\sigma$-algebras
+$\sigma(\mM_1)$ and $\sigma(\mM_2)$ generated by the random variables
+$\mM_1$ and $\mM_2$ respectively. You must do this separately when
+$N = 3$ and when $N = 4$.
+
+\Ans \underline{Case $N=3$:}
+
+$\mM_1$ takes the two values $\pm 1$, with
+\begin{equation}
+  \{\mM_1 = 1\} = \{HHH,HHT,HTH,HTT\}\ ,\qquad \{\mM_1 = -1\} = \{THH,THT,TTH,TTT\}\ .
+\end{equation}
+These two sets are already complements of each other, so
+\begin{equation}
+  \sigma(\mM_1) = \{\emptyset,\ \{\mM_1=1\},\ \{\mM_1=-1\},\ \Omega_3\}\ ,
+\end{equation}
+a $\sigma$-algebra with $4$ elements.
+
+$\mM_2$ takes the three values $2,0,-2$, with
+\begin{align}
+  \{\mM_2=2\} &= \{HHH,HHT\}\ ,\\
+  \{\mM_2=0\} &= \{HTH,HTT,THH,THT\}\ ,\\
+  \{\mM_2=-2\} &= \{TTH,TTT\}\ .
+\end{align}
+These three sets are already pairwise disjoint with union $\Omega_3$,
+so they are the atoms of $\sigma(\mM_2)$, and
+\begin{equation}
+  \sigma(\mM_2) = \{\text{all } 2^3 = 8 \text{ unions of these three atoms}\}\ ,
+\end{equation}
+i.e.\ $\emptyset$, the three atoms above, the three sets $\{\mM_2 \neq
+-2\}$, $\{\mM_2\neq 0\}$, $\{\mM_2 \neq 2\}$ obtained as pairwise
+unions, and $\Omega_3$.
+
+\underline{Case $N=4$:} Now $\Omega_4$ has $16$ elements.
+
+$\{\mM_1=1\}$ is still just ``sequences starting with $H$'', now with
+the remaining two tosses free:
+\begin{equation}
+  \{\mM_1=1\} = \{HHHH,HHHT,HHTH,HHTT,HTHH,HTHT,HTTH,HTTT\}\ ,
+\end{equation}
+an $8$-element set, and $\{\mM_1=-1\}$ is its complement (sequences
+starting with $T$), also with $8$ elements. As before,
+\begin{equation}
+  \sigma(\mM_1) = \{\emptyset,\ \{\mM_1=1\},\ \{\mM_1=-1\},\ \Omega_4\}\ .
+\end{equation}
+
+For $\mM_2$, the value of $\mM_2$ depends only on the first two
+tosses, with the last two tosses free:
+\begin{align}
+  \{\mM_2=2\} &= \{HHHH,HHHT,HHTH,HHTT\}\ ,\\
+  \{\mM_2=0\} &= \{HTHH,HTHT,HTTH,HTTT,THHH,THHT,THTH,THTT\}\ ,\\
+  \{\mM_2=-2\} &= \{TTHH,TTHT,TTTH,TTTT\}\ .
+\end{align}
+Again these three sets partition $\Omega_4$ and are the atoms of
+$\sigma(\mM_2)$, giving a $\sigma$-algebra with $2^3=8$ elements,
+exactly analogous in structure to the $N=3$ case (only the underlying
+atoms are bigger, with sizes $4,8,4$ instead of $2,4,2$).
+\hfill$\blacksquare$
+
+\textbf{Exercise 1d (6 points):} Let $\cA_n$ be the $\sigma$-algebra
+generated by the random variables $\mM_1$, $\mM_2, \ldots, \mM_n$. That
+is, $\cA_n = \sigma(\mM_1, \mM_2, \ldots, \mM_n)$. Compute
+$\cA_1 = \sigma(\mM_1)$, $\cA_2 = \sigma(\mM_1,\mM_2)$,
+$\cA_3 = \sigma(\mM_1,\mM_2,\mM_3)$. For this question, you can take
+the total number of coin tosses to be $N=3$.
+
+\Ans $\cA_1 = \sigma(\mM_1)$ was already computed in Exercise 1c
+above (for $N=3$):
+\begin{equation}
+  \cA_1 = \{\emptyset,\ \{HHH,HHT,HTH,HTT\},\ \{THH,THT,TTH,TTT\},\ \Omega_3\}\ .
+\end{equation}
+
+For $\cA_2 = \sigma(\mM_1,\mM_2)$, we need the atoms, which are the
+non-empty intersections $\{\mM_1=a\}\cap\{\mM_2=b\}$:
+\begin{align}
+  \{\mM_1=1\}\cap\{\mM_2=2\} &= \{HHH,HHT\}\ ,\\
+  \{\mM_1=1\}\cap\{\mM_2=0\} &= \{HTH,HTT\}\ ,\\
+  \{\mM_1=1\}\cap\{\mM_2=-2\} &= \emptyset\ ,\\
+  \{\mM_1=-1\}\cap\{\mM_2=2\} &= \emptyset\ ,\\
+  \{\mM_1=-1\}\cap\{\mM_2=0\} &= \{THH,THT\}\ ,\\
+  \{\mM_1=-1\}\cap\{\mM_2=-2\} &= \{TTH,TTT\}\ .
+\end{align}
+So there are four non-empty atoms,
+$\{HHH,HHT\},\{HTH,HTT\},\{THH,THT\},\{TTH,TTT\}$, each of size $2$,
+corresponding exactly to the four possible values of the pair
+$(\omega_1,\omega_2)$ (namely $HH,HT,TH,TT$). This makes sense, and it must:
+knowing $\mM_1$ and $\mM_2$ is exactly equivalent to knowing
+$\mX_1 = \mM_1$ and $\mX_2 = \mM_2 - \mM_1$, i.e.\ to knowing the first
+two coin tosses. Hence $\cA_2$ consists of all $2^4=16$ unions of
+these four atoms.
+
+For $\cA_3 = \sigma(\mM_1,\mM_2,\mM_3)$, knowing $\mM_1,\mM_2,\mM_3$ is
+equivalent to knowing $\mX_1=\mM_1$, $\mX_2 = \mM_2-\mM_1$,
+$\mX_3=\mM_3-\mM_2$, i.e.\ equivalent to knowing all three coin
+tosses $\omega_1\omega_2\omega_3$ exactly. Hence the atoms of $\cA_3$
+are the eight singletons $\{\omega\}$, $\omega \in \Omega_3$, and
+$\cA_3$ is the full power set of $\Omega_3$, with $2^8 = 256$ elements.
+\hfill$\blacksquare$
+
+We next define the notion of a $\sigma$-subalgebra and that of a
+filtration of $\sigma$-algebras. Given a $\sigma$-algebra $\cF$,
+another $\sigma$-algebra $\mathcal G$ is said to be a
+$\sigma$-subalgebra of $\cF$ if every event in $\mathcal G$ is also
+contained in $\cF$. This is expressed as $\mathcal G \subseteq \cF$.
+
+A filtration of $\sigma$-algebras is a sequence of $\sigma$-algebras
+$\mathcal G_0, \mathcal G_1, \ldots, \mathcal G_n$ such that each
+$\sigma$-algebra in the sequence is a $\sigma$-subalgebra of the next
+one in the sequence. That is, one has the following chain of
+$\sigma$-algebras $\mathcal G_0 \subseteq \mathcal G_1 \subseteq
+\cdots \subseteq \mathcal G_n$.
+
+\textbf{Exercise 1e (2 points):} Let us define $\cA_0$ to be the
+trivial $\sigma$-algebra $\{\emptyset,\Omega\}$. Also recall the
+$\sigma$-algebras $\cA_1, \cA_2, \cA_3$ obtained in the previous
+exercise. Show that the sequence of $\sigma$-algebras
+$\{\cA_n\}_{0\leq n \leq 3}$ is a filtration. That is, show that
+$\cA_0 \subseteq \cA_1 \subseteq \cA_2 \subseteq \cA_3$.
+
+Note: We frequently drop the extra qualification that $0 \leq n \leq
+N$ in the subscript of the filtration and simply write $\{\cA_n\}$ for
+the filtration. An $\cA_n$ without the enclosing braces will be used
+to refer the $n^{\rm th}$ $\sigma$-algebra in the filtration.
+
+\Ans $\cA_0 = \{\emptyset,\Omega_3\}$ is trivially a subset of every
+$\sigma$-algebra, since every $\sigma$-algebra contains $\emptyset$ and
+the whole sample space. So $\cA_0 \subseteq \cA_1$.
+
+For $\cA_1 \subseteq \cA_2$: every element of $\cA_1$ is a union of
+the two atoms $\{\mM_1=1\} = \{HHH,HHT,HTH,HTT\}$ and $\{\mM_1=-1\}
+=\{THH,THT,TTH,TTT\}$. But each of these is itself a union of two of
+the (finer) atoms of $\cA_2$: $\{\mM_1=1\} = \{HHH,HHT\}\cup
+\{HTH,HTT\}$ and $\{\mM_1=-1\} = \{THH,THT\}\cup\{TTH,TTT\}$. Since
+every element of $\cA_1$ is therefore a union of atoms of $\cA_2$, and
+$\cA_2$ contains all such unions, we get $\cA_1 \subseteq \cA_2$.
+
+For $\cA_2 \subseteq \cA_3$: each atom of $\cA_2$, e.g.
+$\{HHH,HHT\}$, is itself the union of two singleton atoms of $\cA_3$,
+namely $\{HHH\}\cup\{HHT\}$, and likewise for the other three atoms of
+$\cA_2$. Since $\cA_3$ is the full power set of $\Omega_3$, it
+certainly contains every union of atoms of $\cA_2$, so
+$\cA_2 \subseteq \cA_3$.
+
+Combining these, $\cA_0 \subseteq \cA_1 \subseteq \cA_2 \subseteq
+\cA_3$, so $\{\cA_n\}_{0\leq n \leq 3}$ is indeed a filtration.
+\hfill$\blacksquare$
+
+Let us now look at conditional expectations. These are defined based
+on conditional probabilities. Suppose we have events $A$ and $B$ and
+we want to compute the probability that $A$ occurs given that $B$ has
+occurred. This means we have to restrict our attention to that part of
+the sample space in which $B$ has occurred. Recall that an event such
+as $A$ or $B$ correspond to certain subsets of the sample space. For
+instance, if we say $B$ is the event that the first two coin tosses
+are $H$ and $T$ respectively, we have to restrict ourselves to the
+subset $B = \{\omega \in \Omega_N \mid \omega_1 = H, \omega_2 = T\}$.
+Similarly, an example of $A$ would be the event that the first three
+coin tosses are $HTH$.
+
+Once we restrict ourselves to the subset $B$, we then look for
+occurrences of the event $A$ within the subset $B$ rather than the
+entire sample space. As discussed in class, this involves the joint
+occurrences of the event $A$ and $B$ which is conveyed by the
+intersection $A \cap B$ which is also sometimes written $AB$. The
+probability of the occurrence of $A$ given $B$ is then
+\begin{equation}
+  \mP\{A \mid B\} = \frac{\mP\{AB\}}{\mP\{B\}}\ .
+\end{equation}
+Let us consider the situation where the number of coin tosses in a
+sequence is $N=3$ so that we are dealing with the sample space of
+sequences of $3$ coin tosses. When $A$ is the event that the three
+coin tosses are $HTH$ and $B$ is the event that the first two coin
+tosses are $HT$, we have $A = \{HTH\}$, $B = \{HTH, HTT\}$, and $AB =
+\{HTH\}$. We have $\mP\{B\} = p^2 q + pq^2 = pq$ and
+$\mP\{AB\} = p^2 q$. Thus, we have
+\begin{equation}
+  \mP\{A\mid B\} = \frac{\mP\{AB\}}{\mP\{B\}} = \frac{p^2 q}{pq} = p\ .
+\end{equation}
+On the contrary, if $A$ is the event that the first three coin tosses
+are $TTH$ and $B$ is the event that the first two coin tosses are
+$HT$, these events cannot jointly occur. So, $\mP\{AB\}=0$ in this
+case since $AB = \emptyset$. This gives $\mP\{A\mid B\} = 0$.
+
+In other words, one has to recompute the probability of occurrence of
+an event $A$ given new information that the event $B$ has occurred.
+This new probability is the conditional probability $\mP\{A\mid B\}$
+and is typically different from the original probability of
+occurrence of $A$ which is simply $\mP\{A\}$.
+
+Another example which will be useful in defining conditional
+expectations is when we take the event $A$ to be a singleton set,
+i.e., a set that contains a single element of the sample space
+$A=\{\omega\}$. The original probability of a sequence with $n_H$
+heads and $n_T$ tails is $p^{n_H}q^{n_T}$. Let us again take $B$ to be
+some event in the sample space (e.g., the subset of sequences starting
+with $HT$). If the sequence $\omega$ is in $B$ (that is, it starts
+with $HT$), then $AB = \{\omega\}$. If $\omega$ is not in $B$, then $AB
+= \emptyset$. Thus, the joint probability of $A=\{\omega\}$ and $B$
+occurring is
+\begin{equation}
+  \mP\{\{\omega\}\cap B\} = \left\{\begin{array}{cc} \mP\{\omega\} & \omega \in B\ ,\\ 0 & \omega \notin B\ .\end{array}\right.
+\end{equation}
+This then gives the conditional probability
+\begin{equation}
+  \mP\{\omega \mid B\} = \left\{\begin{array}{cc} \dfrac{\mP\{\omega\}}{\mP\{B\}} & \omega \in B\ ,\\[2mm] 0 & \omega \notin B\ . \end{array}\right.
+\end{equation}
+For example, in the case of $B$ being the event where the first two
+coin tosses are $HT$, we have shown earlier that $\mP\{B\} = pq$. We
+also know $\mP\{\omega\} = p^{n_H(\omega)}q^{n_T(\omega)}$ where
+$n_H(\omega)$ and $n_T(\omega)$ are the number of heads and tails in
+the sequence $\omega$. This gives
+\begin{equation}
+  \mP\{\omega\mid B\} = \left\{\begin{array}{cc} p^{n_H(\omega)-1}q^{n_T(\omega)-1} & \omega \in B\ ,\\ 0 & \omega \notin B\ . \end{array}\right.
+\end{equation}
+Again, we see that the probability of occurrence of a sequence in
+sample space is revised if we incorporate the information that the
+first two coin tosses are $HT$.
+
+The expectation value of a random variable $Y$ given the knowledge
+that an event $B \subseteq \Omega_N$ has occurred is defined as
+\begin{equation}
+  \mE[Y\mid B] = \sum_{\omega \in \Omega_N} Y(\omega)\,\mP\{\omega\mid B\} = \sum_{\omega \in B} Y(\omega)\, \mP\{\omega\mid B\}\ .
+\end{equation}
+The main change compared to the formula for an ordinary expectation
+value is that the probability associated to each such element $\omega$
+is $\mP\{\omega \mid B\}$ and is typically different from the original
+probability $\mP\{\omega\}$. Note that the summation over all elements
+of the sample space can now be restricted to the subset $B$ since the
+conditional probabilities for $\omega \notin B$ are zero and hence do
+not contribute to the sum.
+
+It is clear from the above formula that the conditional expectation
+value is fixed once the event $B$ is specified. If the event $B$ is
+changed to another event, then the expectation value may also change.
+
+Thus, the conditional expectation value $\mE[Y\mid B]$ is a function
+of the event $B$. Just like conditional probability is a revised
+probability of the occurrence of an event, the conditional expectation
+$\mE[Y \mid B]$ is a revised expectation value of the random variable
+$Y$ given that the event $B$ has occurred.
+
+\textbf{Exercise 1f (2 points):} Let us go back to the random walk.
+Let the event $B$ be the subset of the sample space $\Omega_N$
+consisting of sequences $\omega$ with $\mM_3 = 1$. That is,
+\begin{equation}
+  B = \{\omega \in \Omega_N \mid \mM_3(\omega) = 1\}\ ,
+\end{equation}
+also written in short as $B=\{\mM_3=1\}$. Compute the conditional
+expectation value
+\begin{equation}
+  \mE[\mM_4 \mid B]\ ,\qquad\text{also written as}\qquad \mE[\mM_4\mid \mM_3=1]\ ,
+\end{equation}
+using the formula (11).\footnote{formula 11 in the question sheet and 38 in this solution sheet.} You should compute all the required
+probabilities that appear in the formula (11). For the purposes of
+this question, you can take the number of tosses to be $N=4$ and
+borrow any required results from previous exercises.
+
+\Ans With $N=4$, $B=\{\mM_3=1\}$ depends only on the first three
+tosses: $\mM_3=1$ means $2$ heads and $1$ tail occurred among the first
+three tosses, which happens for exactly $\binom{3}{2}=3$ arrangements,
+$HHT,HTH,THH$, each with probability $p^2q$. The fourth toss is free.
+So, as a subset of $\Omega_4$, $B$ consists of $6$ sequences:
+\begin{align}
+  HHTH\ (\mM_4=2,\ \text{prob } p^3q)\ ,&\qquad HHTT\ (\mM_4=0,\ \text{prob } p^2q^2)\ ,\\
+  HTHH\ (\mM_4=2,\ \text{prob } p^3q)\ ,&\qquad HTHT\ (\mM_4=0,\ \text{prob } p^2q^2)\ ,\\
+  THHH\ (\mM_4=2,\ \text{prob } p^3q)\ ,&\qquad THHT\ (\mM_4=0,\ \text{prob } p^2q^2)\ .
+\end{align}
+So we have $3$ sequences with $\mM_4=2$ (each of probability $p^3q$)
+and $3$ sequences with $\mM_4=0$ (each of probability $p^2q^2$).
+
+First, $\mP\{B\} = 3p^3q + 3p^2q^2 = 3p^2q(p+q) = 3p^2q$. Using
+(9)-(10)\footnote{again, 9-10 in the question sheet, and 36-37 in this sheet.}, for $\omega \in B$ with $\mM_4(\omega)=2$ we get
+$\mP\{\omega\mid B\} = p^3q/(3p^2q) = p/3$, and for $\omega\in B$ with
+$\mM_4(\omega)=0$ we get $\mP\{\omega \mid B\} = p^2q^2/(3p^2q) = q/3$.
+Then, using (11),
+\begin{equation}
+  \mE[\mM_4\mid B] = 3\cdot 2 \cdot \frac{p}{3} + 3 \cdot 0 \cdot \frac{q}{3} = 2p\ .
+\end{equation}
+(As a check: since $\mX_4$ is independent of the first three tosses,
+$\mE[\mM_4\mid B] = \mE[\mM_3\mid B] + \mE[\mX_4] = 1 + (p-q) = 2p$, which agrees.) For the symmetric random walk
+$p=q=\tfrac12$ this gives $\mE[\mM_4\mid B] = 1$. \hfill$\blacksquare$
+
+As discussed above, the conditional expectation $\mE[Y\mid B]$ is a
+function of the event $B$. However, we know that information present
+in specifying one event $B$ in sample space can be expressed in terms
+of the $\sigma$-algebra generated by the event $B$ via complements,
+unions and intersections. This is in fact the $\sigma$-algebra
+\begin{equation}
+  \sigma(B) = \{B, B^c, \emptyset, \Omega\}\ ,
+\end{equation}
+and is also the smallest $\sigma$-algebra of any possible
+$\sigma$-algebra that contains the event $B$. In other words, any other
+$\sigma$-algebra that contains $B$ must contain more subsets than
+$\sigma(B)$.
+
+The reason to consider this extra layer of abstraction is that, if one
+knows the probability $\mP\{B\}$ of the event $B$ occurring, one also
+immediately knows the probability $\mP\{B^c\}$ of the event $B^c$
+occurring ($\mP\{B^c\} = 1-\mP\{B\}$). Further, we know trivially that
+$B \cap B^c = \emptyset$ is the null event with $\mP\{\emptyset\} =
+0$, i.e., no event occurs, and $B \cup B^c = \Omega$ with $\mP\{\Omega\}
+= 1$, i.e., some event occurs. Together, this $\sigma$-algebra
+completely summarizes the new information that can be specified once
+the event $B$ is specified, along with the probabilities -- either we
+say $B$ occurs, or $B^c$ occurs, or $B\cap B^c = \emptyset$ occurs,
+which is the same as the information that no sequence in the sample
+space has occurred, or finally $B \cup B^c = \Omega$ occurs, which is
+the same as having no prior information about any specific event
+occurring.
+
+The expectation value of some random variable $Y$ can now be computed
+for every event in $\sigma(B)$ and these expectation values give us a
+better understanding as to how the expected value of $Y$ is revised
+given the information in $\sigma(B)$.
+
+\textbf{Exercise 1g (4 points):} One can now compute the conditional
+expectation value of a random variable $Y$ given each of the subsets in
+the $\sigma$-algebra $\sigma(B)$. Take $Y=\mM_4$, $B=\{\mM_3=1\}$ as in
+the previous exercise and compute
+\begin{equation}
+  \mE[\mM_4\mid B^c]\ ,\quad \mE[\mM_4\mid \emptyset]\ ,\quad \mE[\mM_4\mid \Omega]\ .
+\end{equation}
+For this question, you can take $N=4$.
+
+\Ans \underline{$\mE[\mM_4\mid \Omega]$:} Since $\mP\{\omega\mid
+\Omega\} = \mP\{\omega\}/\mP\{\Omega\} = \mP\{\omega\}$ for every
+$\omega$, conditioning on the whole sample space changes nothing, so
+$\mE[\mM_4\mid\Omega]$ is simply the ordinary (unconditional)
+expectation of $\mM_4$:
+\begin{equation}
+  \mE[\mM_4\mid\Omega] = \mE[\mM_4] = 4(p-q)\ ,
+\end{equation}
+using the fact that $\mE[\mM_n] = n(p-q)$ for the random walk (each
+step contributes $\mE[\mX_i] = p - q$ on average, independently).
+
+\underline{$\mE[\mM_4\mid \emptyset]$:} Formula (11) defines this as a
+sum over $\omega \in \emptyset$, which is an empty sum. By the usual
+convention that an empty sum equals $0$,
+\begin{equation}
+  \mE[\mM_4\mid \emptyset] = 0\ .
+\end{equation}
+(Strictly speaking $\mP\{\emptyset\}=0$ makes the ratio
+$\mP\{\omega\mid\emptyset\}$ in (9) an undefined $0/0$; the value $0$
+above is simply the convention used to avoid quirks that arise otherwise.)
+
+\underline{$\mE[\mM_4\mid B^c]$:} We use the law of total expectation:
+since $B$ and $B^c$ partition $\Omega_4$,
+\begin{equation}
+  \mE[\mM_4] = \mE[\mM_4\mid B]\,\mP\{B\} + \mE[\mM_4\mid B^c]\,\mP\{B^c\}\ .
+\end{equation}
+{From} Exercise 1f, $\mE[\mM_4\mid B] = 2p$ and $\mP\{B\}=3p^2q$, so
+$\mP\{B^c\} = 1-3p^2q$, and hence
+\begin{equation}
+  \mE[\mM_4\mid B^c] = \frac{\mE[\mM_4] - 2p\cdot 3p^2q}{1-3p^2q} = \frac{4(p-q) - 6p^3q}{1-3p^2q}\ .
+\end{equation}
+As a check, one can also compute this directly from (11) by summing
+over the $10$ sequences of $B^c$: these are $HHHH\ (p^4,\mM_4{=}4)$,
+$HHHT\ (p^3q,\mM_4{=}2)$, three sequences $HTTH,THTH,TTHH$ each
+$(p^2q^2,\mM_4{=}0)$, four sequences $HTTT,THTT,TTHT,TTTH$ each
+$(pq^3,\mM_4{=}-2)$, and $TTTT\ (q^4,\mM_4{=}-4)$; summing
+$\mM_4(\omega)\mP\{\omega\}$ over these and dividing by
+$\mP\{B^c\}=1-3p^2q$ reproduces the same expression above. For the
+symmetric random walk $p=q=\tfrac12$, this gives
+$\mE[\mM_4\mid B^c] = -\tfrac{3}{5}$. \hfill$\blacksquare$
+
+Next, we define the conditional expectation random variable
+$\mE[X\mid\cF]$ which involves a random variable $X$ and information
+given in terms of a $\sigma$-algebra $\cF$. The definition we give here
+holds only for a $\sigma$-algebra which is generated by its atoms. (As
+mentioned earlier, not every $\sigma$-algebra has atoms, or even if it
+has atoms, may not be generated by them.)
+
+Since the atoms of the $\sigma$-algebra $\cF$ are all disjoint, it can
+be shown that any given element $\omega$ of sample space belongs to
+one and only one atom. First, since the union of all atoms is the
+sample space, every element of sample space must belong to at least
+one atom. If a given element $\omega$ belongs to more than one atom,
+then the two atoms have a common element $\omega$ which means that
+they are no longer disjoint. Hence, every element $\omega$ of sample
+space belongs to one and only atom of the $\sigma$-algebra $\cF$. Note
+that this is true for any $\sigma$-algebra generated by its atoms.
+
+This fact allows us to define the conditional expectation random
+variable $\mE[X\mid\cF]$ by giving its value on each element of sample
+space. Let us call the unique atom containing a given element $\omega$
+as $A^\omega$. Then, the value of $\mE[X\mid \cF]$ on $\omega$ is given
+by the conditional expectation value $\mE[X\mid A^\omega]$:
+\begin{equation}
+  \mE[X\mid\cF](\omega) = \mE[X\mid A^\omega]\ .
+\end{equation}
+Note that the notation on the left and right hand sides are very
+similar. On the left hand side, the conditioning is on a full
+$\sigma$-algebra and this conditional expectation is always
+interpreted as a random variable, i.e., a function on sample space. On
+the right hand side, the conditioning is on a particular atomic event
+$A^\omega$ and this is always a conditional expectation value, i.e., a
+number.
+
+For instance, suppose $B$ is an event, e.g., the event consisting of
+all coin toss sequences starting with $HT$. The $\sigma$-algebra
+generated by $B$ is $\{B, B^c, \emptyset, \Omega\}$. Clearly, the
+events $B$ and $B^c$ are the atoms of $\sigma(B)$. Thus, the value of
+the random variable $\mE[Y\mid \sigma(B)]$ on the elements
+$\omega \in \Omega$ are given by
+\begin{equation}
+  \mE[Y\mid\sigma(B)](\omega) = \left\{\begin{array}{cc} \mE[Y\mid B] & \omega \in B\ ,\\ \mE[Y \mid B^c] & \omega \in B^c\ . \end{array}\right.
+\end{equation}
+
+\textbf{Exercise 1h (4 points):} Compute the random variables
+$\mE[\mM_3\mid\sigma(\mM_2)]$ and $\mE[\mM_3\mid \cA_2]$ where
+$\cA_2 = \sigma(\mM_1,\mM_2)$. How are these answers different? For
+this exercise, you can take $N=3$ and use the $\sigma$-algebras for
+this case.
+
+\Ans \underline{$\mE[\mM_3\mid \sigma(\mM_2)]$:} From Exercise 1c, the
+atoms of $\sigma(\mM_2)$ (for $N=3$) are $\{\mM_2=2\}=\{HHH,HHT\}$,
+$\{\mM_2=0\}=\{HTH,HTT,THH,THT\}$ and $\{\mM_2=-2\}=\{TTH,TTT\}$. On
+each atom, $\mM_3 = \mM_2 + \mX_3$, and since $\mX_3$ is independent of
+$(\omega_1,\omega_2)$ (hence independent of the atom), we get
+$\mE[\mM_3 \mid \mM_2=k] = k + \mE[\mX_3] = k+(p-q)$ for each atom
+value $k$. (One can check this directly, e.g.\ for $k=0$:
+$\mP\{\mM_2=0\}=2pq$ and $\sum_{\omega} \mM_3(\omega)\mP(\omega) =
+p^2q - pq^2+p^2q-pq^2 = 2pq(p-q)$, giving $\mE[\mM_3\mid\mM_2=0] =
+p-q$, matching $0+(p-q)$.) Hence
+\begin{equation}
+  \mE[\mM_3\mid\sigma(\mM_2)](\omega) = \left\{\begin{array}{cl} 2+(p-q) & \omega \in \{HHH,HHT\}\ ,\\ (p-q) & \omega \in \{HTH,HTT,THH,THT\}\ ,\\ -2+(p-q) & \omega \in \{TTH,TTT\}\ . \end{array}\right.
+\end{equation}
+In other words, as a random variable, $\mE[\mM_3\mid\sigma(\mM_2)] =
+\mM_2 + (p-q)$.
+
+\underline{$\mE[\mM_3\mid \cA_2]$:} From Exercise 1d, the (finer)
+atoms of $\cA_2$ are $\{HHH,HHT\}$, $\{HTH,HTT\}$, $\{THH,THT\}$,
+$\{TTH,TTT\}$, corresponding to $\omega_1\omega_2 = HH,HT,TH,TT$
+respectively. On the atom $\omega_1\omega_2=HH$ (i.e.\ $\mM_2=2$),
+$\mE[\mM_3\mid\text{atom}] = 2+(p-q)$ exactly as before. On the atom
+$\omega_1\omega_2=HT$ (i.e.\ $\mM_2=0$), $\mM_3 = 0+\mX_3$ and $\mX_3$
+is independent of the atom, so $\mE[\mM_3\mid \text{atom}] = p-q$.
+Likewise on the atom $\omega_1\omega_2 = TH$ (also $\mM_2=0$),
+$\mE[\mM_3\mid\text{atom}]=p-q$. On the atom $\omega_1\omega_2=TT$
+(i.e.\ $\mM_2=-2$), $\mE[\mM_3\mid\text{atom}] = -2+(p-q)$. So
+\begin{equation}
+  \mE[\mM_3\mid\cA_2](\omega) = \left\{\begin{array}{cl} 2+(p-q) & \omega_1\omega_2 = HH\ ,\\ (p-q) & \omega_1\omega_2 = HT\ ,\\ (p-q) & \omega_1\omega_2 = TH\ ,\\ -2+(p-q) & \omega_1\omega_2 = TT\ . \end{array}\right.
+\end{equation}
+
+\underline{Comparison:} Even though $\cA_2$ has strictly finer atoms
+than $\sigma(\mM_2)$ (it splits the atom $\{\mM_2=0\}$ into the two
+separate atoms $HT$ and $TH$), the value of the conditional
+expectation on both of these finer atoms is the same, $p-q$, which
+equals the value that $\sigma(\mM_2)$ assigns to the combined atom
+$\{\mM_2=0\}$. So, as random variables,
+\begin{equation}
+  \mE[\mM_3\mid\sigma(\mM_2)] = \mE[\mM_3\mid \cA_2] = \mM_2 + (p-q)\ ,
+\end{equation}
+they are \emph{identical}, even though they are defined using two
+different $\sigma$-algebras, one strictly coarser than the other. The
+reason is that the extra information in $\cA_2$ (knowing $\mM_1$, i.e.,
+whether the first toss individually was $H$ or $T$, on top of knowing
+$\mM_2$) is irrelevant to $\mX_3$, which is independent of the first
+two tosses; so this extra information does not change the conditional
+expectation of $\mM_3$. \hfill$\blacksquare$
+
+Optional exercises for more practice (will not be graded):
+
+\textbf{Exercise 1i:} Compute all the random variables
+$\mE[\mM_m\mid\sigma(\mM_n)]$ for all $1 \leq m,n \leq N=3$. Do you
+observe a pattern?
+
+
+\textbf{Exercise 1j:} Compute all the random variables
+$\mE[\mM_m\mid \cA_n]$ for all $1\leq m,n\leq N=3$. How are the
+$\sigma$-algebras $\cA_n$ related to the $\sigma$-algebras $\cF_n$
+determined by the first $n$ coin tosses that we discussed in class?
+
+
+\end{document}
